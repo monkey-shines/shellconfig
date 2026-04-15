@@ -2,7 +2,7 @@
 trap 'read -p "Press Enter to run: $BASH_COMMAND"' DEBUG
 set -e
 
-REPO="https://github.com/YOURNAME/dotfiles.git"
+REPO="https://github.com/monkey-shines/shellconfig.git"
 DOTFILES_DIR="$HOME/.dotfiles"
 
 echo "==> Installing dependencies..."
