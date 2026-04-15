@@ -76,14 +76,6 @@ fi
 
 echo "==> Enabling fzf keybindings..."
 
-if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
-    echo "source /usr/share/doc/fzf/examples/key-bindings.zsh" >> "$DOTFILES_DIR/zsh/.fzf.zsh"
-fi
-
-if [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
-    echo "source /usr/share/doc/fzf/examples/completion.zsh" >> "$DOTFILES_DIR/zsh/.fzf.zsh"
-fi
-
 # Optional: skip fonts in Docker
 
 if [ ! -f /.dockerenv ]; then
