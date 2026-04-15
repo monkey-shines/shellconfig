@@ -17,10 +17,5 @@ setopt SHARE_HISTORY
 # Better completion
 autoload -Uz compinit && compinit
 
-# Aliases
-alias ls="eza --icons --group-directories-first"
-alias ll="eza -lah --icons --group-directories-first"
-alias la="eza -a --icons"
-
 # Quality of life
 setopt autocd
