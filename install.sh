@@ -97,4 +97,4 @@ fi
 # chsh -s "$(which zsh)" || true
 
 echo "==> Done. Restart your shell or run: zsh"
-echo "==> run chsh -s <path-to-your-zsh> to change your shell
+echo "==> run chsh -s <path-to-your-zsh> to change your shell"
