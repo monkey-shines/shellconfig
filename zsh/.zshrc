@@ -17,9 +17,15 @@ setopt SHARE_HISTORY
 # Better completion
 autoload -Uz compinit && compinit
 
+# fzf integration
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Source aliases
 [ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.exports ] && source ~/.exports
+
+# fzf preview with bat
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border \
+--preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null'"
 
 # Quality of life
 setopt autocd
