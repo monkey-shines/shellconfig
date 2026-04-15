@@ -36,6 +36,7 @@ link_file () {
 
 link_file "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
 link_file "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
+link_file "$DOTFILES_DIR/zsh/.aliases" "$HOME/.aliases"
 
 echo "==> Installing modern CLI tools..."
 sudo apt install -y eza bat || true

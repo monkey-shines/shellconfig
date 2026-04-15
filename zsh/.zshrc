@@ -17,5 +17,8 @@ setopt SHARE_HISTORY
 # Better completion
 autoload -Uz compinit && compinit
 
+# Source aliases
+[ -f ~/.aliases ] && source ~/.aliases
+
 # Quality of life
 setopt autocd
