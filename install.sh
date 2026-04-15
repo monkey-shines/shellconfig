@@ -73,9 +73,6 @@ if [ ! -d "$ZSH_DIR/zsh-syntax-highlighting" ]; then
         "$ZSH_DIR/zsh-syntax-highlighting"
 fi
 
-echo "==> Setting default shell..."
-chsh -s "$(which zsh)" || true
-
 # Optional: skip fonts in Docker
 if [ ! -f /.dockerenv ]; then
     echo "==> Installing fonts..."
@@ -83,5 +80,8 @@ if [ ! -f /.dockerenv ]; then
 else
     echo "==> Skipping font install (Docker)"
 fi
+
+# echo "==> Setting default shell..."
+# chsh -s "$(which zsh)" || true
 
 echo "==> Done. Restart your shell or run: zsh"
