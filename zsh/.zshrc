@@ -19,6 +19,7 @@ autoload -Uz compinit && compinit
 
 # Source aliases
 [ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.exports ] && source ~/.exports
 
 # Quality of life
 setopt autocd
