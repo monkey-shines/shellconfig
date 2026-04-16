@@ -3,5 +3,4 @@ alias cat='batcat'
 alias grep='rg'
 alias ls='eza -lah --icons --color=always --group-directories-first | less -R'
 alias lsp='eza -lah --icons --color=always --group-directories-first | less -R'
-alias lt='eza -a --tree --level=2 --icons'
-
+alias lt='eza -a --tree --color=always --level=2 --icons | less -r'
