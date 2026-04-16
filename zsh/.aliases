@@ -1,4 +1,5 @@
 alias more='less'
 alias ls="eza -lah --icons --group-directories-first"
+alias lsp='eza -lah --icons --color=always --group-directories-first | less -R'
 alias lt="eza -a --tree --level=2 --icons"
 
