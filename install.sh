@@ -39,7 +39,7 @@ link_file "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 link_file "$DOTFILES_DIR/zsh/.aliases" "$HOME/.aliases"
 
 echo "==> Installing modern CLI tools..."
-sudo apt install -y eza bat || true
+sudo apt install -y eza ripgrep bat || true
 
 # Fallback for eza
 if ! command -v eza >/dev/null; then
