@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-trap 'read -p "Press Enter to run: $BASH_COMMAND"' DEBUG
+# trap 'read -p "Press Enter to run: $BASH_COMMAND"' DEBUG
 set -e
 
 REPO="https://github.com/monkey-shines/shellconfig.git"
