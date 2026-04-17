@@ -1,5 +1,5 @@
-alias more='less'
-alias cat='batcat'
+alias more='less -R'
+alias cat='batcat -p'
 alias top='htop'
 alias ls='eza -lah --icons --color=always --group-directories-first'
 alias ltree='eza -a --tree --color=always --level=2 --icons'
