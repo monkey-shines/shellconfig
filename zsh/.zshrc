@@ -18,7 +18,7 @@ setopt SHARE_HISTORY
 # Better completion
 autoload -Uz compinit && compinit
 
-# Source aliases
+# Source aliases & exports
 [ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.exports ] && source ~/.exports
 
