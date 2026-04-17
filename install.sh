@@ -7,7 +7,7 @@ DOTFILES_DIR="$HOME/.dotfiles"
 
 echo "==> Installing dependencies..."
 sudo apt update
-sudo apt install -y zsh git curl unzip wget
+sudo apt install -y zsh git curl unzip htop wget
 
 echo "==> Installing Starship..."
 if ! command -v starship >/dev/null; then
