@@ -55,7 +55,6 @@ if ! command -v eza >/dev/null; then
 http://deb.gierens.de stable main" | \
         sudo tee /etc/apt/sources.list.d/eza.list
 
-    sudo apt update
     sudo apt install -y eza
 fi
 
@@ -75,14 +74,15 @@ if [ ! -d "$ZSH_DIR/zsh-syntax-highlighting" ]; then
 fi
 
 # Optional: skip fonts in Docker
+# This is only needed if it is a local shell directly on a host machine - leaving out for now
+# if [ ! -f /.dockerenv ]; then
+#    echo "==> Installing fonts..."
+#    bash "$DOTFILES_DIR/fonts/install-fonts.sh"
+# else
+#    echo "==> Skipping font install (Docker)"
+#fi
 
-if [ ! -f /.dockerenv ]; then
-    echo "==> Installing fonts..."
-    bash "$DOTFILES_DIR/fonts/install-fonts.sh"
-else
-    echo "==> Skipping font install (Docker)"
-fi
-
+# Had some trouble with this not running as sudo or with permission -- do it manually
 # echo "==> Setting default shell..."
 # chsh -s "$(which zsh)" || true
 
