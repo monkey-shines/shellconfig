@@ -74,15 +74,6 @@ if [ ! -d "$ZSH_DIR/zsh-syntax-highlighting" ]; then
         "$ZSH_DIR/zsh-syntax-highlighting"
 fi
 
-# Optional: skip fonts in Docker
-# This is only needed if it is a local shell directly on a host machine - leaving out for now as I ssh to everything
-# if [ ! -f /.dockerenv ]; then
-#    echo "==> Installing fonts..."
-#    bash "$DOTFILES_DIR/fonts/install-fonts.sh"
-# else
-#    echo "==> Skipping font install (Docker)"
-#fi
-
 # Had some trouble with this not running as sudo or with permission -- do it manually
 # echo "==> Setting default shell..."
 # chsh -s "$(which zsh)" || true
