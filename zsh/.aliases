@@ -8,20 +8,20 @@ alias ltime='eza -lah --icons --color=always --sort=time'
 alias cat='batcat -p'
 alias more='less -R'
 alias top='htop'
+
 # -------------------------
 # System / admin
 # -------------------------
 alias aservices='systemctl list-units --type=service --all --no-pager'
 alias ajournal='journalctl -xe --no-pager'
-
 alias afullupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean'
-
 alias afirewall='sudo ufw status numbered'
 alias afirewallv='sudo ufw status verbose'
-
 alias adisks='df -hT'
 
-# OS info
+# -------------------------
+# Basic OS Info
+# -------------------------
 alias aos='grep PRETTY_NAME /etc/os-release | cut -d= -f2'
 alias akernel='uname -r'
 
