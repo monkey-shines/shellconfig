@@ -4,6 +4,13 @@
 ffind() {
     sudo find / -iname "*$1*" 2>/dev/null
 }
+# -------------------------
+# Basic system information
+# -------------------------
+asysinfo() {
+    echo "OS: $(grep PRETTY_NAME /etc/os-release | cut -d= -f2 | tr -d '"')"
+    echo "Kernel: $(uname -r)"
+}
 
 # -------------------------
 # Service control (restart + verify)
