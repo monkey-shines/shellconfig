@@ -1,14 +1,13 @@
 # -------------------------
-# Core shell overrides
+# Core DirList shell overrides
 # -------------------------
 alias ls='eza -lah --icons --color=always --group-directories-first'
 alias ltree='eza -a --tree --color=always --level=2 --icons'
 alias ltime='eza -lah --icons --color=always --sort=time'
 
-alias cat='batcat -p 2>/dev/null || bat -p'
+alias cat='batcat -p'
 alias more='less -R'
 alias top='htop'
-
 # -------------------------
 # System / admin
 # -------------------------
@@ -23,13 +22,15 @@ alias afirewallv='sudo ufw status verbose'
 alias adisks='df -hT'
 
 # OS info
-alias aos='grep PRETTY_NAME /etc/os-release | cut -d= -f2 | tr -d "\""'"
+alias aos='grep PRETTY_NAME /etc/os-release | cut -d= -f2'
 alias akernel='uname -r'
-alias asys='hostnamectl'
 
 # -------------------------
 # Networking
 # -------------------------
-alias ports='sudo ss -tlpn'
-alias aroute='ip route show'
+alias aports='sudo ss -tlpn'
 alias aroutev='ip -c route show'
+
+# -------------------------
+# Packages
+# -------------------------
