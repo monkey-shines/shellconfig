@@ -1,21 +1,28 @@
 #!/usr/bin/env bash
+# trap 'read -p "Press Enter to run: $BASH_COMMAND"' DEBUG
 set -e
 
 REPO="https://github.com/monkey-shines/shellconfig.git"
 DOTFILES_DIR="$HOME/.dotfiles"
 
-echo "==> Updating package index..."
-sudo apt update
+# -----------------------------
+# Prevent interactive prompts
+# -----------------------------
+export DEBIAN_FRONTEND=noninteractive
+export NEEDRESTART_MODE=a
 
-echo "==> Installing base system dependencies..."
+echo "==> Installing dependencies..."
+sudo apt update
+sudo apt install -y zsh git curl unzip htop wget tmux
+
+echo "==> Installing base admin tools..."
 sudo apt install -y \
-    zsh git curl unzip htop wget tmux \
     dnsutils net-tools iproute2 traceroute \
     sysstat lsof ripgrep ncdu nmap \
-    openssl command-not-found
+    openssl command-not-found tzdata
 
-echo "==> Ensuring filesystem utilities..."
-sudo apt install -y util-linux || true
+echo "==> Ensuring timezone does not prompt..."
+sudo timedatectl set-timezone "$(cat /etc/timezone 2>/dev/null || echo UTC)" || true
 
 echo "==> Installing Starship..."
 if ! command -v starship >/dev/null; then
@@ -51,9 +58,9 @@ link_file "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 echo "==> Installing modern CLI tools..."
 sudo apt install -y eza bat || true
 
-# Fallback for eza if repo version unavailable
+# Fallback for eza
 if ! command -v eza >/dev/null; then
-    echo "==> Installing eza via repo..."
+    echo "Installing eza manually..."
     sudo apt install -y gpg
     sudo mkdir -p /etc/apt/keyrings
 
