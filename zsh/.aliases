@@ -1,6 +1,40 @@
-alias more='less -R'
-alias cat='batcat -p'
-alias top='htop'
+# -------------------------
+# Core shell overrides
+# -------------------------
 alias ls='eza -lah --icons --color=always --group-directories-first'
 alias ltree='eza -a --tree --color=always --level=2 --icons'
 alias ltime='eza -lah --icons --color=always --sort=time'
+
+alias cat='batcat -p 2>/dev/null || bat -p'
+alias more='less -R'
+alias top='htop'
+
+# -------------------------
+# System / admin
+# -------------------------
+alias aservices='systemctl list-units --type=service --all --no-pager'
+alias ajournal='journalctl -xe --no-pager'
+
+alias afullupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean'
+
+alias afirewall='sudo ufw status numbered'
+alias afirewallv='sudo ufw status verbose'
+
+alias adisks='df -hT'
+
+# OS info
+alias aos='grep PRETTY_NAME /etc/os-release | cut -d= -f2 | tr -d "\""'"
+alias akernel='uname -r'
+alias asys='hostnamectl'
+
+# -------------------------
+# Networking
+# -------------------------
+alias ports='sudo ss -tlpn'
+alias aroute='ip route show'
+alias aroutev='ip -c route show'
+
+# -------------------------
+# Packages
+# -------------------------
+alias apkg='dpkg-query -W -f="${Package}\n"'
