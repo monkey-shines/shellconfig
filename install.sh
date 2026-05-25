@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
-# trap 'read -p "Press Enter to run: $BASH_COMMAND"' DEBUG
 set -e
 
 REPO="https://github.com/monkey-shines/shellconfig.git"
 DOTFILES_DIR="$HOME/.dotfiles"
 
-echo "==> Installing dependencies..."
+echo "==> Updating package index..."
 sudo apt update
-sudo apt install -y zsh git curl unzip htop wget tmux
+
+echo "==> Installing base system dependencies..."
+sudo apt install -y \
+    zsh git curl unzip htop wget tmux \
+    dnsutils net-tools iproute2 traceroute \
+    sysstat lsof ripgrep ncdu nmap \
+    openssl command-not-found
+
+echo "==> Ensuring filesystem utilities..."
+sudo apt install -y util-linux || true
 
 echo "==> Installing Starship..."
 if ! command -v starship >/dev/null; then
@@ -35,27 +43,27 @@ link_file () {
 }
 
 link_file "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
-link_file "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 link_file "$DOTFILES_DIR/zsh/.aliases" "$HOME/.aliases"
 link_file "$DOTFILES_DIR/zsh/.exports" "$HOME/.exports"
 link_file "$DOTFILES_DIR/zsh/.functions" "$HOME/.functions"
+link_file "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 
 echo "==> Installing modern CLI tools..."
-sudo apt install -y eza ripgrep bat || true
+sudo apt install -y eza bat || true
 
-# Fallback for eza
+# Fallback for eza if repo version unavailable
 if ! command -v eza >/dev/null; then
-    echo "Installing eza manually..."
+    echo "==> Installing eza via repo..."
     sudo apt install -y gpg
     sudo mkdir -p /etc/apt/keyrings
 
     curl -fsSL https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | \
         sudo gpg --dearmor -o /etc/apt/keyrings/eza.gpg
 
-    echo "deb [signed-by=/etc/apt/keyrings/eza.gpg] \
-http://deb.gierens.de stable main" | \
-        sudo tee /etc/apt/sources.list.d/eza.list
+    echo "deb [signed-by=/etc/apt/keyrings/eza.gpg] http://deb.gierens.de stable main" | \
+        sudo tee /etc/apt/sources.list.d/eza.list >/dev/null
 
+    sudo apt update
     sudo apt install -y eza
 fi
 
@@ -74,9 +82,5 @@ if [ ! -d "$ZSH_DIR/zsh-syntax-highlighting" ]; then
         "$ZSH_DIR/zsh-syntax-highlighting"
 fi
 
-# Had some trouble with this not running as sudo or with permission -- do it manually
-# echo "==> Setting default shell..."
-# chsh -s "$(which zsh)" || true
-
-echo "==> Done. Restart your shell or run: zsh"
-echo "==> run chsh -s <path-to-your-zsh> to change your shell"
+echo "==> Done."
+echo "Restart shell: exec zsh"
