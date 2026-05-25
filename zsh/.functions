@@ -76,4 +76,3 @@ anets() {
 slogs() {
     journalctl -u "$1" --no-pager -n 100
 }
-:wq
