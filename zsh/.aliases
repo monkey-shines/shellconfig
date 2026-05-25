@@ -33,8 +33,3 @@ alias asys='hostnamectl'
 alias ports='sudo ss -tlpn'
 alias aroute='ip route show'
 alias aroutev='ip -c route show'
-
-# -------------------------
-# Packages
-# -------------------------
-alias apkg='dpkg-query -W -f="${Package}\n"'
