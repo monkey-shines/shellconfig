@@ -25,6 +25,13 @@ astatus() {
 }
 
 # -------------------------
+# Fast package list and search
+# -------------------------
+apkg() {
+    dpkg-query -W -f='${Package}\n' | awk 'NF'
+}
+
+# -------------------------
 # Package inspection (deep dive)
 # -------------------------
 pinspect() {
