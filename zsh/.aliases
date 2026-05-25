@@ -30,7 +30,3 @@ alias akernel='uname -r'
 # -------------------------
 alias aports='sudo ss -tlpn'
 alias aroutev='ip -c route show'
-
-# -------------------------
-# Packages
-# -------------------------
