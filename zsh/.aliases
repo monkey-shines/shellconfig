@@ -22,7 +22,6 @@ alias adisks='df -hT'
 # -------------------------
 # Basic OS Info
 # -------------------------
-alias aos='grep PRETTY_NAME /etc/os-release | cut -d= -f2'
 alias akernel='uname -r'
 
 # -------------------------
