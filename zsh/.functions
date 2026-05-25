@@ -51,11 +51,15 @@ pinspect() {
 # Network debugging helper (lightweight)
 # -------------------------
 anets() {
-    echo "=== IP ADDR ==="
-    ip a
+    echo "=== Interfaces ==="
+    ip -brief address
 
     echo ""
-    echo "=== ROUTES ==="
+    echo "=== Default Route ==="
+    ip route | grep default
+
+    echo ""
+    echo "=== Full Routing Table ==="
     ip route
 }
 
@@ -65,3 +69,4 @@ anets() {
 slogs() {
     journalctl -u "$1" --no-pager -n 100
 }
+:wq
