@@ -1,1 +1,60 @@
+# -------------------------
+# File search (greppable fallback tool)
+# -------------------------
+ffind() {
+    sudo find / -iname "*$1*" 2>/dev/null
+}
 
+# -------------------------
+# Service control (restart + verify)
+# -------------------------
+arestart() {
+    sudo systemctl restart "$1"
+    systemctl status "$1" --no-pager
+}
+
+astatus() {
+    systemctl status "$1" --no-pager
+}
+
+# -------------------------
+# Package inspection (deep dive)
+# -------------------------
+pinspect() {
+    echo "=== PACKAGE: $1 ==="
+    echo ""
+
+    echo "--- STATUS / METADATA ---"
+    dpkg -s "$1" 2>/dev/null
+
+    echo ""
+    echo "--- VERSION SUMMARY ---"
+    dpkg-query -W -f='${Package} ${Version} ${Status}\n' "$1" 2>/dev/null
+
+    echo ""
+    echo "--- INSTALLED FILES (top 30) ---"
+    dpkg -L "$1" 2>/dev/null | head -n 30
+
+    echo ""
+    echo "--- REVERSE DEPENDENCIES ---"
+    apt-cache rdepends "$1" 2>/dev/null | head -n 30
+}
+
+# -------------------------
+# Network debugging helper (lightweight)
+# -------------------------
+anets() {
+    echo "=== IP ADDR ==="
+    ip a
+
+    echo ""
+    echo "=== ROUTES ==="
+    ip route
+}
+
+# -------------------------
+# Optional quick service log viewer
+# -------------------------
+slogs() {
+    journalctl -u "$1" --no-pager -n 100
+}
