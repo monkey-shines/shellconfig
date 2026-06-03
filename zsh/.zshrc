@@ -26,3 +26,18 @@ autoload -Uz compinit && compinit
 
 # Quality of life
 setopt autocd
+
+# -------------------------------------------------
+# CUSTOM KEYBIND OVERRIDES (ALWAYS PUT THIS LAST)
+# -------------------------------------------------
+typeset -g -A key
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Delete]="${terminfo[kdch1]}"
+
+[[ -n "${key[Home]}" ]] && bindkey -- "${key[Home]}" beginning-of-line
+[[ -n "${key[End]}" ]]  && bindkey -- "${key[End]}" end-of-line
+[[ -n "${key[Delete]}" ]] && bindkey -- "${key[Delete]}" delete-char
+
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
