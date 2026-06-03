@@ -104,3 +104,4 @@ if [ ! -d "$ZSH_DIR/zsh-syntax-highlighting" ]; then
 fi
 
 echo "==> Done. Restart shell with: exec zsh"
+echo "==> Dont forget to change shells with chsh -s /usr/bin/zsh or similar"
