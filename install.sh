@@ -103,5 +103,13 @@ if [ ! -d "$ZSH_DIR/zsh-syntax-highlighting" ]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_DIR/zsh-syntax-highlighting"
 fi
 
+# -------------------------------------------------
+# AUTOMATIC SHELL SWITCH
+# -------------------------------------------------
+echo "==> Setting Zsh as default shell..."
+ZSH_PATH=$(which zsh)
+
+# Safely modify the system user profile without prompting for a password
+sudo usermod -s "$ZSH_PATH" "$USER"
+
 echo "==> Done. Restart shell with: exec zsh"
-echo "==> Dont forget to change shells with chsh -s /usr/bin/zsh or similar"
