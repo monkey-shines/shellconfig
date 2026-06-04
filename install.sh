@@ -104,6 +104,65 @@ if [ ! -d "$ZSH_DIR/zsh-syntax-highlighting" ]; then
 fi
 
 # -------------------------------------------------
+# PURE BASH-TO-ZSH HISTORY CONVERSION
+# -------------------------------------------------
+BASH_HIST="$HOME/.bash_history"
+ZSH_HIST="$HOME/.zsh_history"
+
+if [ -f "$BASH_HIST" ]; then
+    echo "==> Converting .bash_history to a fresh .zsh_history..."
+    
+    TEMP_HIST=$(mktemp)
+    START_TIME=$(($(date +%s) - 8640000)) # 100 days ago runway
+    COUNTER=0
+    BUFFER=""
+
+    while IFS= read -r line || [ -n "$line" ]; do
+        # Trim leading and trailing whitespace
+        line=$(echo "$line" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+        # Skip completely empty lines or native Bash timestamp comments
+        if [[ -z "$line" ]] || [[ "$line" =~ ^#[0-9]+$ ]]; then
+            continue
+        fi
+
+        # Check if this line ends with a backslash (multi-line command)
+        if [[ "$line" =~ \\$ ]]; then
+            # Strip the backslash and append the line to our build buffer
+            BUFFER+="${line%\\} "
+            continue
+        else
+            # No backslash, so append this final line to whatever is in the buffer
+            BUFFER+="$line"
+        fi
+
+        # Clean up any accidental double spaces created by joining lines
+        BUFFER=$(echo "$BUFFER" | tr -s ' ')
+
+        # Increment timestamp by 1 second to keep history ordered perfectly
+        CURRENT_TIME=$((START_TIME + COUNTER))
+        
+        # Write out the completed, unified command in Zsh format
+        echo ": ${CURRENT_TIME}:0;${BUFFER}" >> "$TEMP_HIST"
+        
+        # Reset the buffer for the next command sequence
+        BUFFER=""
+        COUNTER=$((COUNTER + 1))
+    done < "$BASH_HIST"
+
+    # Safely write out any remaining content left over in the buffer
+    if [[ -n "$BUFFER" ]]; then
+        CURRENT_TIME=$((START_TIME + COUNTER))
+        echo ": ${CURRENT_TIME}:0;${BUFFER}" >> "$TEMP_HIST"
+    fi
+
+    # Wipe out any uninitialized Zsh history and replace it entirely with your converted Bash history
+    mv "$TEMP_HIST" "$ZSH_HIST"
+    chmod 600 "$ZSH_HIST"
+    echo "==> Done. Successfully formatted and imported $COUNTER command lines into Zsh."
+fi
+
+# -------------------------------------------------
 # AUTOMATIC SHELL SWITCH (ROBUST VERSION)
 # -------------------------------------------------
 echo "==> Setting Zsh as default shell..."
