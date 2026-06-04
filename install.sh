@@ -23,7 +23,7 @@ sudo -E apt install -y \
     zsh git curl unzip htop wget tmux \
     dnsutils net-tools iproute2 traceroute \
     sysstat lsof ripgrep ncdu nmap \
-    openssl command-not-found
+    openssl neofetch command-not-found
 
 # -------------------------------------------------
 # TIMEZONE (SAFE + NON-INTERACTIVE)
