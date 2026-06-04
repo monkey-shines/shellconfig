@@ -104,12 +104,18 @@ if [ ! -d "$ZSH_DIR/zsh-syntax-highlighting" ]; then
 fi
 
 # -------------------------------------------------
-# AUTOMATIC SHELL SWITCH
+# AUTOMATIC SHELL SWITCH (ROBUST VERSION)
 # -------------------------------------------------
 echo "==> Setting Zsh as default shell..."
 ZSH_PATH=$(which zsh)
 
-# Safely modify the system user profile without prompting for a password
-sudo usermod -s "$ZSH_PATH" "$USER"
+# Fallback chain: Use $USER, if empty use $(id -un), if still empty use $(whoami)
+TARGET_USER="${USER:-$(id -un)}"
+TARGET_USER="${TARGET_USER:-$(whoami)}"
+
+echo "==> Target account identified as: $TARGET_USER"
+
+# Safely modify the system user profile
+sudo usermod -s "$ZSH_PATH" "$TARGET_USER"
 
 echo "==> Done. Restart shell with: exec zsh"
