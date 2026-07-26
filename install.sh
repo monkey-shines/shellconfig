@@ -16,6 +16,22 @@ echo "==> Updating package index..."
 sudo -E apt update -y
 
 # -------------------------------------------------
+# SYSTEM CONFIGURATION
+# -------------------------------------------------
+
+echo "==> Configuring sudo environment..."
+
+if [ ! -f /etc/sudoers.d/editor-env ]; then
+    echo 'Defaults env_keep += "EDITOR VISUAL"' | \
+        sudo tee /etc/sudoers.d/editor-env >/dev/null
+
+    sudo chmod 440 /etc/sudoers.d/editor-env
+
+    echo "==> Validating sudoers configuration..."
+    sudo visudo -cf /etc/sudoers
+fi
+
+# -------------------------------------------------
 # BASE SYSTEM PACKAGES
 # -------------------------------------------------
 echo "==> Installing base system packages..."
