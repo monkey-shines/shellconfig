@@ -5,6 +5,19 @@ REPO="https://github.com/monkey-shines/shellconfig.git"
 DOTFILES_DIR="$HOME/.dotfiles"
 
 # -------------------------------------------------
+# LOGGING
+# -------------------------------------------------
+
+LOGFILE="$HOME/bootstrap-$(date +%Y%m%d-%H%M%S).log"
+
+exec > >(tee -a "$LOGFILE")
+exec 2>&1
+
+echo "==> Logging to:"
+echo "    $LOGFILE"
+echo
+
+# -------------------------------------------------
 # HARDENED NON-INTERACTIVE MODE (CRITICAL)
 # -------------------------------------------------
 export DEBIAN_FRONTEND=noninteractive
