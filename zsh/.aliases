@@ -13,10 +13,11 @@ alias top='htop'
 # -------------------------
 # System / admin
 # -------------------------
-alias aservfail=systemctl --failed
-alias aservactive=systemctl is-active
-alias aservenable=systemctl is-enabled
-alias aservreload=sudo systemctl daemon-reloadalias aservices='systemctl list-units --type=service --all --no-pager'
+alias aservfail='systemctl --failed'
+alias aservactive='systemctl is-active'
+alias aservenable='systemctl is-enabled'
+alias aservreload='sudo systemctl daemon-reload'
+alias aservices='systemctl list-units --type=service --all --no-pager'
 alias aservlog='journalctl -n 100 -u'
 alias aservconf='systemctl show'
 alias aservinfo='systemctl status'
