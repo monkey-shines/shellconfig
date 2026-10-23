@@ -5,7 +5,8 @@ alias ls='eza -lah --group --icons --color=always --group-directories-first'
 alias ltree='eza -a --tree --color=always --level=2 --icons'
 alias ltime='eza -lah --icons --color=always --sort=time'
 
-alias cat='batcat -p'
+alias acatpg='batcat -p'
+alias acatnopg='batcat -p --paging=never'
 alias more='less -R'
 alias top='htop'
 
@@ -13,6 +14,9 @@ alias top='htop'
 # System / admin
 # -------------------------
 alias aservices='systemctl list-units --type=service --all --no-pager'
+alias aservicelog='journalctl -n 100 -u'
+alias aserviceconf='systemctl show'
+alias adetails='systemctl status'
 alias ajournal='journalctl -xe --no-pager'
 alias afullupdate='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean'
 alias afirewall='sudo ufw status numbered'
