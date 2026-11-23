@@ -13,6 +13,7 @@ alias top='htop'
 # -------------------------
 # System / admin
 # -------------------------
+alias auserinfo='getent passwd'
 alias aservfail='systemctl --failed'
 alias aservactive='systemctl is-active'
 alias aservenable='systemctl is-enabled'
